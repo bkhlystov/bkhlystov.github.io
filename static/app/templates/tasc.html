@@ -1,0 +1,59 @@
+<header id="header">
+
+    <form id="todo-form">
+        <input class="new-todo" placeholder="Введите пожалуйста категорию: " ng-model="category" autofocus>
+        <input class="new-todo" placeholder="Введите пожалкуйста коментарий" ng-model="coment"  autofocus>
+        <p class="new-todo">
+            Выберете цвет:
+            <select ng-model="color" class="form-control col-md-4">
+                <option value="black">Черный</option>
+                <option value="green">Зеленый</option>
+                <option value="red">Красный</option>
+                <option value="blue">Синий</option>
+            </select>
+        </p>
+        <button class="btn btn-danger" type="reset">Очистить форму </button>
+        <button class="btn btn-success" type="button" ng-click="addTodo(this)">Сохранить запись </button>
+    </form>
+    <p>
+        Искать:
+        <input ng-model="sortField"  class="form-control col-md-3"/>
+    </p>
+    <p>
+        Сортировать:
+        <select ng-model="statusFilter" class="form-control col-md-3">
+            <option value="">Все</option>
+            <option value="false">Активные</option>
+            <option value="true">Выполненные</option>
+        </select>
+    </p>
+
+</header>
+<main id="main" ng-show="todos.length" ng-cloak>
+    <input id="toggle-all" type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)">
+    <label for="toggle-all">Mark all as complete</label>
+    <button id="clear-completed" ng-click="clearCompletedTodos()">Clear completed</button>
+    <ul id="todo-list">
+        <li ng-repeat="todo in todos | filter:sortField | filter:statusFilter track by $index" ng-class="{completed: todo.completed, editing: todo == editedTodo}" style="color: {{todo.color}};">
+            <input class="toggle" type="checkbox" ng-model="todo.completed" ng-change="toggleCompleted(todo)">
+            <p>Category: {{todo.category}}</p>
+
+            <div class="view">
+                <label ng-dblclick="editTodo(todo)">
+                    <p>Tasc: {{todo.title}}</p>
+                </label>
+                <button class="destroy" ng-click="removeTodo(todo)"></button>
+            </div>
+            <form ng-submit="saveEdits(todo, 'submit')">
+                <input class="edit" ng-trim="false" ng-model="todo.title" todo-escape="revertEdits(todo)" ng-blur="saveEdits(todo, 'blur')" todo-focus="todo == editedTodo">
+            </form>
+        </li>
+    </ul>
+</main>
+<footer>
+    <p>Создал Хлыстов Богдан</p>
+</footer>
+
+
+
+
