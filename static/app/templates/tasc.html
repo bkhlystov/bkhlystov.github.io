@@ -32,7 +32,7 @@
 <main id="main" ng-show="todos.length" ng-cloak>
     <input id="toggle-all" type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)">
     <label for="toggle-all">Mark all as complete</label>
-    <button id="clear-completed" ng-click="clearCompletedTodos()">Clear completed</button>
+    <button id="clear-completed" ng-click="clearCompletedTodos()">Удалить завершенные</button>
     <ul id="todo-list">
         <li ng-repeat="todo in todos | filter:sortField | filter:statusFilter track by $index" ng-class="{completed: todo.completed, editing: todo == editedTodo}" style="color: {{todo.color}};">
             <input class="toggle" type="checkbox" ng-model="todo.completed" ng-change="toggleCompleted(todo)">
