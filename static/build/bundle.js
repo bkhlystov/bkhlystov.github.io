@@ -35512,6 +35512,21 @@ var bundle =
 	        });
 	    };
 
+	    $scope.revertEdits = function (todo) {
+	        todos[todos.indexOf(todo)] = $scope.originalTodo;
+	        $scope.editedTodo = null;
+	        $scope.originalTodo = null;
+	        $scope.reverted = true;
+	    };
+
+	    $scope.removeTodo = function (todo) {
+	        store.delete(todo);
+	    };
+
+	    $scope.saveTodo = function (todo) {
+	        store.put(todo);
+	    };
+
 	    $scope.toggleCompleted = function (todo, completed) {
 	        if (_angular2.default.isDefined(completed)) {
 	            todo.completed = completed;
